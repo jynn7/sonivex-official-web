@@ -34,10 +34,14 @@ export const site = {
   developer: read(env.VITE_DEVELOPER_NAME) ?? 'Cheah Jynn',
   supportEmail,
   supportHref: supportEmail ? `mailto:${supportEmail}` : undefined,
-  privacyUrl: safeUrl(env.VITE_PRIVACY_POLICY_URL),
+  // Defaults to the policy page built into this site (/privacy/). Set the variable to use another URL.
+  privacyUrl: safeUrl(env.VITE_PRIVACY_POLICY_URL) ?? '/privacy/',
   siteUrl: safeUrl(env.VITE_SITE_URL)?.replace(/\/$/, ''),
   year: new Date().getFullYear(),
 } as const
+
+/** Site-relative links open in the same tab; anything else opens a new one. */
+export const privacyIsExternal = !site.privacyUrl.startsWith('/')
 
 export const downloads = {
   playStoreUrl: safeUrl(env.VITE_PLAY_STORE_URL),

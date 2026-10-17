@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { site } from '@/config'
+import { privacyIsExternal, site } from '@/config'
 import { vReveal } from '@/composables/vReveal'
 import { privacyPromises } from '@/data/features'
 import Icon from './Icon.vue'
@@ -27,10 +27,9 @@ import Icon from './Icon.vue'
             It only goes online when you ask it to: the one-time AI model download, or a link you choose to open.
           </p>
           <a
-            v-if="site.privacyUrl"
             :href="site.privacyUrl"
-            target="_blank"
-            rel="noopener"
+            :target="privacyIsExternal ? '_blank' : undefined"
+            :rel="privacyIsExternal ? 'noopener' : undefined"
             class="mt-8 inline-flex items-center gap-2 rounded-full bg-paper px-6 py-3 font-semibold text-night transition hover:gap-3"
           >
             Read the privacy policy <Icon name="arrow" class="size-5" />

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { site } from '@/config'
+import { privacyIsExternal, site } from '@/config'
 import BrandMark from './BrandMark.vue'
 </script>
 
@@ -20,7 +20,7 @@ import BrandMark from './BrandMark.vue'
         <a href="#privacy" class="text-muted transition hover:text-ink">Privacy</a>
         <a href="#settings" class="text-muted transition hover:text-ink">Settings</a>
         <a href="#download" class="text-muted transition hover:text-ink">Download</a>
-        <a v-if="site.privacyUrl" :href="site.privacyUrl" target="_blank" rel="noopener" class="text-muted transition hover:text-ink">Privacy policy</a>
+        <a :href="site.privacyUrl" :target="privacyIsExternal ? '_blank' : undefined" :rel="privacyIsExternal ? 'noopener' : undefined" class="text-muted transition hover:text-ink">Privacy policy</a>
         <a v-if="site.supportHref" :href="site.supportHref" class="text-muted transition hover:text-ink">Support</a>
       </nav>
     </div>
