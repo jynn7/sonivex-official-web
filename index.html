@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>%VITE_APP_NAME% — %VITE_APP_TAGLINE%</title>
+    <meta
+      name="description"
+      content="%VITE_APP_NAME% is a local-first music and video player for Android. On-device AI mixes, Android Auto, a floating glass interface, and no account, ads or tracking."
+    />
+    <meta name="theme-color" content="#12131A" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="%VITE_APP_NAME% — %VITE_APP_TAGLINE%" />
+    <meta
+      property="og:description"
+      content="A local-first music player for Android with on-device AI mixes, Android Auto and no tracking."
+    />
+    <meta property="og:image" content="%VITE_SITE_URL%/og-image.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" href="/fonts/jost-latin.woff" as="font" type="font/woff" crossorigin />
+
+    <!-- Applies the saved theme before first paint so there is no light/dark flash -->
+    <script>
+      try {
+        var saved = localStorage.getItem('sonivex-theme')
+        var dark = saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light'
+      } catch (e) {
+        document.documentElement.dataset.theme = 'dark'
+      }
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,141 @@
+@import 'tailwindcss';
+
+@font-face {
+  font-family: 'Jost';
+  src: url('/fonts/jost-latin.woff') format('woff');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Theme is chosen by [data-theme] on <html>; see index.html and useTheme.ts */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+:root {
+  --bg: #f4f5f8;
+  --bg-soft: #eceef3;
+  --surface: #ffffff;
+  --surface-2: #f8f9fc;
+  --ink: #15161d;
+  --muted: #5b6075;
+  --line: rgb(21 22 29 / 0.1);
+  --glass: rgb(255 255 255 / 0.72);
+  --aurora-a: rgb(255 107 74 / 0.22);
+  --aurora-b: rgb(91 91 240 / 0.2);
+  --link: #4544d4;
+}
+
+:root[data-theme='dark'] {
+  --bg: #12131a;
+  --bg-soft: #0e0f15;
+  --surface: #1b1c26;
+  --surface-2: #171821;
+  --ink: #f4f5f8;
+  --muted: #a6aabc;
+  --line: rgb(244 245 248 / 0.1);
+  --glass: rgb(27 28 38 / 0.72);
+  --aurora-a: rgb(255 107 74 / 0.18);
+  --aurora-b: rgb(91 91 240 / 0.26);
+  --link: #a9a9ff;
+}
+
+@theme inline {
+  --font-sans: 'Jost', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --color-bg: var(--bg);
+  --color-bg-soft: var(--bg-soft);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-glass: var(--glass);
+  --color-link: var(--link);
+  --color-coral: #ff6b4a;
+  --color-indigo: #5b5bf0;
+  --color-night: #12131a;
+  --color-paper: #f4f5f8;
+
+  --animate-eq: eq 1.4s ease-in-out infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-spin-slow: spin 22s linear infinite;
+  --animate-sweep: sweep 14s linear infinite;
+}
+
+@keyframes eq {
+  0%, 100% { transform: scaleY(0.25); }
+  50% { transform: scaleY(1); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+
+@keyframes sweep {
+  from { stroke-dashoffset: 100; }
+  to { stroke-dashoffset: 0; }
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgb(255 107 74 / 0.35);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-indigo);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Scroll reveal, toggled by the v-reveal directive */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.8s cubic-bezier(0.2, 0.7, 0.2, 1),
+    transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@utility glass {
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  backdrop-filter: blur(18px) saturate(1.4);
+  border: 1px solid var(--line);
+}
+
+@utility text-gradient {
+  background-image: linear-gradient(100deg, #ff6b4a 0%, #ff8a6b 35%, #7c7cf6 75%, #5b5bf0 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .reveal { opacity: 1; transform: none; }
+}
